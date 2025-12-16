@@ -1,0 +1,19 @@
+*{
+    color: #ececec;
+    font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+     box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.app {
+    background-color: #212121;
+    display: flex;
+}
+.forSidebarHide {
+    width: 100%;
+}

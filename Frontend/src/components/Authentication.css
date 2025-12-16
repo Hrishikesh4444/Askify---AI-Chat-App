@@ -1,0 +1,141 @@
+/* Overlay */
+.login-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Modal Card */
+.login-popup-container {
+  width: 380px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px 26px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  position: relative;
+  animation: fadeScale 0.25s ease;
+}
+
+/* Header */
+.login-popup-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-popup-title h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #121a2f;
+}
+
+/* Close Button */
+.close-btn {
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #777;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.close-btn:hover {
+  color: #000;
+  transform: scale(1.1);
+}
+
+/* Inputs */
+.login-popup-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.login-popup-inputs input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #d0d0d0;
+  font-size: 0.9rem;
+  color: #111;
+}
+
+.login-popup-inputs input:focus {
+  outline: none;
+  border-color: #121212;
+  box-shadow: 0 0 0 2px rgba(18, 18, 18, 0.15);
+}
+
+/* Button */
+.login-popup-container button[type="submit"] {
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #121a2f;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.login-popup-container button[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Terms */
+.login-popup-condition {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.75rem;
+  color: #777;
+}
+
+/* Switch text */
+.login-popup p {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: center;
+  margin: 0;
+}
+
+.login-popup p span {
+  color: #121a2f;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-popup p span:hover {
+  text-decoration: underline;
+}
+
+/* Animation */
+@keyframes fadeScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Mobile */
+@media (max-width: 420px) {
+  .login-popup-container {
+    width: 90%;
+  }
+}

@@ -1,0 +1,93 @@
+.chats {
+    max-width: 720px;
+    padding: 6rem 1rem;
+    overflow-y: auto;
+}
+
+/* Scrollbar – subtle */
+.chats::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chats::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chats::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+.chats::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Firefox */
+.chats {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+/* ---------- USER MESSAGE ---------- */
+
+.userDiv {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0.8rem;
+}
+
+.userMessage {
+    background-color: #1e293b; /* dark blue-gray */
+    color: #e5e7eb;
+    padding: 10px 14px;
+    border-radius: 12px 12px 4px 12px;
+    max-width: 70%;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ---------- GPT MESSAGE ---------- */
+
+.gptDiv {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #e5e7eb;
+}
+
+/* Markdown code blocks */
+
+
+/* Inline code */
+.gptDiv code {
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+/* Highlight.js */
+.hljs {
+    border-radius: 10px !important;
+}
+
+/* Prevent overflow */
+pre {
+    white-space: pre-wrap;
+}
+
+@media (max-width: 768px) {
+
+    .chats {
+        padding: 4rem 0.75rem;
+        max-width: 100%;
+    }
+
+    .userMessage {
+        max-width: 85%;
+        font-size: 0.85rem;
+    }
+
+    .gptDiv {
+        font-size: 0.85rem;
+    }
+}
