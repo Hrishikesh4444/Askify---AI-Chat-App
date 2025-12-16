@@ -11,7 +11,8 @@ const StoreContextProvider=(props)=>{
     const [allThreads,setAllThreads]=useState([]);
     const [token, setToken] = useState(localStorage.getItem("token") || "");
 
-    const url="http://localhost:8080/api";
+    //const url="http://localhost:8080/api";
+    const url="https://askify-ai-chat-app.onrender.com/api"
     
     const contextValue={
         prompt,
