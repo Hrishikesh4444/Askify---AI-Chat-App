@@ -71,7 +71,7 @@ function Sidebar({showSidebar, setShowSidebar}) {
     return (
         <section className={`sidebar ${showSidebar ? "open" : ""}`}>
             <button onClick={createNewChat}>
-                <img src="public/logo.png" alt="gpt logo" className="logo"></img>
+                <img src="/logo.png" alt="gpt logo" className="logo"></img>
                 <span><i className="fa-solid fa-pen-to-square"></i></span>
             </button>
 
