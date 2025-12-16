@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Authentication.css";
 import { StoreContext } from "../context/StoreContext";
 import axios from "axios";
+import { ScaleLoader } from "react-spinners";
 const Authentication = ({ setShowLogin }) => {
   const {
     token,
@@ -17,6 +18,7 @@ const Authentication = ({ setShowLogin }) => {
     setPrevChats,
   } = useContext(StoreContext);
   const [currState, setCurrState] = useState("Sign up");
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -30,38 +32,38 @@ const Authentication = ({ setShowLogin }) => {
   };
   const onLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     let newUrl = url;
-    if (currState === "Log in") {
-      newUrl += "/signin";
-    } else {
-      newUrl += "/signup";
-    }
+    newUrl += currState === "Log in" ? "/signin" : "/signup";
 
     try {
       const response = await axios.post(newUrl, data);
       if (response.data.success) {
         const tokenResp = response.data.token;
         setToken(tokenResp);
-        localStorage.setItem("token",tokenResp);
-        
-        // If signup: server returns `thread` (initial thread)
+        localStorage.setItem("token", tokenResp);
+
         if (currState === "Sign up") {
           const thread = response.data.thread;
           if (thread) {
             setAllThreads([{ threadId: thread.threadId, title: thread.title }]);
             setCurrThreadId(thread.threadId);
-            setPrevChats([]); // open fresh chat window
+            setPrevChats([]);
             setNewChat(true);
             setReply(null);
           }
         } else {
-          // Log in: server returns threads (history) and newThread (the fresh chat)
           const threads = response.data.threads || [];
           const newThread = response.data.newThread;
-          const mapped = threads.map((t) => ({ threadId: t.threadId, title: t.title }));
-          if (newThread) {
-            mapped.unshift({ threadId: newThread.threadId, title: newThread.title });
-          }
+
+          const mapped = threads.map((t) => ({
+            threadId: t.threadId,
+            title: t.title,
+          }));
+
+          if (newThread) mapped.unshift(newThread);
+
           setAllThreads(mapped);
           if (newThread) setCurrThreadId(newThread.threadId);
           setPrevChats([]);
@@ -71,12 +73,16 @@ const Authentication = ({ setShowLogin }) => {
 
         setShowLogin(false);
       } else {
-        alert(response.data.message || "Login failed"); // Add this
+        alert(response.data.message || "Authentication failed");
       }
     } catch (error) {
       console.error("Login/Register Error:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
+
   useEffect(() => {
     scrollTo(0, 0);
     document.body.style.overflow = "hidden";
@@ -132,9 +138,20 @@ const Authentication = ({ setShowLogin }) => {
             required
           />
         </div>
-        <button type="submit">
-          {currState === "Sign up" ? "Create account" : "Log in"}
+        {loading && (
+          <div style={{ margin: "10px 0" }}>
+            <ScaleLoader color="#fff" />
+          </div>
+        )}
+
+        <button type="submit" disabled={loading}>
+          {loading
+            ? "Please wait..."
+            : currState === "Sign up"
+            ? "Create account"
+            : "Log in"}
         </button>
+
         <div className="login-popup-condition">
           <input style={{ cursor: "pointer" }} type="checkbox" required />
           <p>By continuing, I agree to the terms of use & privacy policy.</p>
